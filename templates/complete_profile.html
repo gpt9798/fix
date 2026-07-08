@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <main class="hero">
+    <div class="container hero-inner">
+      <section class="hero-card" aria-label="Complete Profile">
+        <h1 class="hero-title" style="margin-top:0">Complete your profile</h1>
+        <p class="hero-subtitle" style="margin-bottom:18px">
+          Enter your <strong>Phone Number</strong> and select your <strong>services</strong> before you can access the dashboard.
+        </p>
+
+        <form method="post" novalidate>
+          {{ form.hidden_tag() }}
+
+          <div style="display:grid; gap:12px; margin-top:10px;">
+            <label>
+              <div style="font-weight:800; margin-bottom:6px">{{ form.phone.label }}</div>
+              {{ form.phone(class_="input") }}
+            </label>
+            {% if form.phone.errors %}
+              <div style="color:#ffb4b4; font-weight:700; font-size:.95rem">{{ form.phone.errors[0] }}</div>
+            {% endif %}
+
+            <div style="margin-top:6px; padding:12px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.03)">
+              <div style="font-weight:900; margin-bottom:10px">Professional services (checkboxes)</div>
+
+              <label style="display:flex; align-items:center; gap:10px; font-weight:700;">
+                {{ form.plumber() }} <span>Plumber</span>
+              </label>
+
+              <label style="display:flex; align-items:center; gap:10px; font-weight:700; margin-top:10px">
+                {{ form.electrician() }} <span>Electrician</span>
+              </label>
+            </div>
+
+            {% if form.services_error %}
+              <div style="color:#ffb4b4; font-weight:700; font-size:.95rem; margin-top:-2px">
+                {{ form.services_error[0] }}
+              </div>
+            {% endif %}
+
+
+            {% if form.plumber.errors %}
+              <div style="color:#ffb4b4; font-weight:700; font-size:.95rem">{{ form.plumber.errors[0] }}</div>
+            {% endif %}
+            {% if form.electrician.errors %}
+              <div style="color:#ffb4b4; font-weight:700; font-size:.95rem">{{ form.electrician.errors[0] }}</div>
+            {% endif %}
+
+            <button class="btn btn-primary" type="submit" style="width:100%">Save & Continue</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+{% endblock %}
+
