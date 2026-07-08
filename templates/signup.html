@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <main class="hero">
+    <div class="container hero-inner">
+      <section class="hero-card" aria-label="Signup">
+        <h1 class="hero-title" style="margin-top:0">Create your account</h1>
+        <p class="hero-subtitle" style="margin-bottom:18px">
+          Choose Customer or Professional. For professionals, select plumber and/or electrician.
+        </p>
+
+        <form method="post" novalidate>
+          {{ form.hidden_tag() }}
+
+          <div style="display:grid; gap:12px; margin-top:10px;">
+
+            <label>
+              <div style="font-weight:800; margin-bottom:6px">{{ form.role.label }}</div>
+              {{ form.role(class_="input") }}
+            </label>
+
+
+            <label>
+              <div style="font-weight:800; margin-bottom:6px">{{ form.name.label }}</div>
+              {{ form.name(class_="input") }}
+            </label>
+            {% if form.name.errors %}
+              <div style="color:#ffb4b4; font-weight:700; font-size:.95rem">{{ form.name.errors[0] }}</div>
+            {% endif %}
+
+            <label>
+              <div style="font-weight:800; margin-bottom:6px">{{ form.email.label }}</div>
+              {{ form.email(class_="input") }}
+            </label>
+            {% if form.email.errors %}
+              <div style="color:#ffb4b4; font-weight:700; font-size:.95rem">{{ form.email.errors[0] }}</div>
+            {% endif %}
+
+            <label>
+              <div style="font-weight:800; margin-bottom:6px">{{ form.phone.label }}</div>
+              {{ form.phone(class_="input") }}
+            </label>
+            {% if form.phone.errors %}
+              <div style="color:#ffb4b4; font-weight:700; font-size:.95rem">{{ form.phone.errors[0] }}</div>
+            {% endif %}
+
+            <label>
+              <div style="font-weight:800; margin-bottom:6px">{{ form.city.label }}</div>
+              {{ form.city(class_="input") }}
+            </label>
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px">
+              <label>
+                <div style="font-weight:800; margin-bottom:6px">{{ form.latitude.label }}</div>
+                {{ form.latitude(class_="input") }}
+              </label>
+              <label>
+                <div style="font-weight:800; margin-bottom:6px">{{ form.longitude.label }}</div>
+                {{ form.longitude(class_="input") }}
+              </label>
+            </div>
+
+            <div style="margin-top:6px; padding:12px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.03)">
+              <div style="font-weight:900; margin-bottom:10px">Professional services (checkboxes)</div>
+
+              <label style="display:flex; align-items:center; gap:10px; font-weight:700;">
+                {{ form.plumber() }} <span>Plumber</span>
+              </label>
+              <label style="display:flex; align-items:center; gap:10px; font-weight:700; margin-top:10px">
+                {{ form.electrician() }} <span>Electrician</span>
+              </label>
+
+              <div style="height:12px"></div>
+
+              <label>
+                <div style="font-weight:800; margin-bottom:6px">{{ form.average_rating.label }}</div>
+                {{ form.average_rating(class_="input") }}
+              </label>
+            </div>
+
+            <label>
+              <div style="font-weight:800; margin-bottom:6px">{{ form.password.label }}</div>
+              <div class="password-wrap">
+                {{ form.password(class_="input password-input") }}
+                <button type="button" class="password-toggle" aria-label="Show/hide password" title="Show/hide password">
+                  👁️
+                </button>
+              </div>
+            </label>
+            {% if form.password.errors %}
+              <div style="color:#ffb4b4; font-weight:700; font-size:.95rem">{{ form.password.errors[0] }}</div>
+            {% endif %}
+
+            <button class="btn btn-primary" type="submit" style="width:100%">Sign up</button>
+          </div>
+        </form>
+
+        <div style="height:18px"></div>
+
+        <div class="google-signin" aria-label="Google sign in">
+          <a class="btn btn-secondary" href="{{ url_for('google_login') }}" style="width:100%">
+            Sign up with Google
+          </a>
+        </div>
+
+        <div style="margin-top:18px; text-align:center">
+          <a href="{{ url_for('login') }}" style="color:rgba(96,165,250,.95); font-weight:800; text-decoration:none">
+            Already have an account? Login
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+{% endblock %}
+
