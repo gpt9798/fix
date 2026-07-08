@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if current_user.role == 'customer' %}
+    {% include 'customer_professional_list.html' %}
+  {% else %}
+    <main class="hero">
+      <div class="container hero-inner">
+        <section class="hero-card" aria-label="Dashboard">
+          <div class="hero-badge">Account</div>
+          <h1 class="hero-title" style="font-size:clamp(1.4rem,2.7vw,2rem);">You're logged in ✅</h1>
+          <p class="hero-subtitle" style="margin-bottom:14px">
+            Name: <strong>{{ current_user.name }}</strong><br />
+            Role: <strong>{{ current_user.role }}</strong>
+          </p>
+
+          {% if current_user.role == 'professional' %}
+            {% if current_user.professional %}
+              <p class="hero-subtitle" style="margin-bottom:12px">
+                Services: <strong>
+                  {% if current_user.professional.plumber %}Plumber{% endif %}
+                  {% if current_user.professional.plumber and current_user.professional.electrician %} &amp; {% endif %}
+                  {% if current_user.professional.electrician %}Electrician{% endif %}
+                </strong>
+              </p>
+              <p class="hero-subtitle" style="margin-bottom:18px">
+                Average rating: <strong>{{ '%.1f'|format(current_user.professional.average_rating) }}</strong>
+              </p>
+            {% endif %}
+          {% endif %}
+
+          <div class="cta-row" style="margin-top:8px">
+            <a class="btn btn-secondary" href="{{ url_for('logout') }}" style="min-width:260px">Logout</a>
+          </div>
+        </section>
+      </div>
+    </main>
+  {% endif %}
+{% endblock %}
+
+
