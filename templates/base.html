@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ title or 'KarigarOnline.com' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <style>
+    .flash{margin:12px 0 0; padding:10px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.05); color:rgba(234,240,255,.92); font-weight:700;}
+    .flash.error{border-color: rgba(255,180,180,.35); background: rgba(255,180,180,.08);}
+  </style>
+</head>
+<body>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="container" style="padding-top:12px">
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+
+  <script>
+    // Simple flash auto-dismiss
+    window.setTimeout(() => {
+      const elms = document.querySelectorAll('.flash');
+      elms.forEach(e => { e.style.display = 'none'; });
+    }, 3500);
+
+    // Password show/hide toggles
+    function wirePasswordToggles(){
+      const toggles = document.querySelectorAll('.password-toggle');
+      toggles.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const wrap = btn.closest('.password-wrap');
+          if(!wrap) return;
+          const input = wrap.querySelector('input');
+          if(!input) return;
+
+          const isPassword = input.type === 'password';
+          input.type = isPassword ? 'text' : 'password';
+          btn.textContent = isPassword ? '🙈' : '👁️';
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', wirePasswordToggles);
+  </script>
+
+
+</body>
+</html>
+
+
