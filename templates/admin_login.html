@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <main class="hero">
+    <div class="container hero-inner">
+      <section class="hero-card" aria-label="Admin Login">
+        <h1 class="hero-title" style="margin-top:0">Admin Login</h1>
+        <p class="hero-subtitle" style="margin-bottom:18px">
+          Enter your admin credentials.
+        </p>
+
+        <form method="post" novalidate>
+          <div style="display:grid; gap:12px; margin-top:10px;">
+            <label>
+              <div style="font-weight:800; margin-bottom:6px">Username</div>
+              <input class="input" type="text" name="username" autocomplete="username" required />
+            </label>
+
+            <label>
+              <div style="font-weight:800; margin-bottom:6px">Password</div>
+              <div class="password-wrap">
+                <input class="input password-input" type="password" name="password" autocomplete="current-password" required />
+                <button type="button" class="password-toggle" aria-label="Show/hide password" title="Show/hide password">
+                  👁️
+                </button>
+              </div>
+            </label>
+
+            <button class="btn btn-primary" type="submit" style="width:100%">Login as Admin</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+{% endblock %}
+
