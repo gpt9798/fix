@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="{{ url_for('home') }}" aria-label="KarigarOnline.com">
+        <span class="brand-mark" aria-hidden="true">🛠️</span>
+        <span class="brand-text">KarigarOnline.com</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+        <a class="nav-link" href="{{ url_for('login') }}">Plumbers</a>
+        <a class="nav-link" href="{{ url_for('login') }}">Electricians</a>
+        <a class="nav-link" href="{{ url_for('signup') }}">For Professionals</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="hero">
+    <div class="container hero-inner">
+      <section class="hero-card" aria-label="Homepage hero">
+        <div class="hero-badge">Reliable professionals for everyday work</div>
+        <h1 class="hero-title">Find a trusted plumber or electrician—fast.</h1>
+        <p class="hero-subtitle">
+          Customers post requirements. Professionals join and get leads.
+          Built for clarity, speed, and quality.
+        </p>
+
+        <div class="cta-row" role="group" aria-label="Primary actions">
+          <a class="btn btn-primary" href="{{ url_for('login') }}">Find a Professional</a>
+          <a class="btn btn-secondary" href="{{ url_for('signup') }}">Join as a Professional</a>
+        </div>
+
+
+        <div class="trust-row" aria-label="Highlights">
+          <div class="trust-item">
+            <div class="trust-icon" aria-hidden="true">✅</div>
+            <div>
+              <div class="trust-title">Quality Focus</div>
+              <div class="trust-text">Experienced, verified services.</div>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon" aria-hidden="true">⚡</div>
+            <div>
+              <div class="trust-title">Quick Contact</div>
+              <div class="trust-text">Get connected in minutes.</div>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon" aria-hidden="true">🧰</div>
+            <div>
+              <div class="trust-title">Plumbers & Electricians</div>
+              <div class="trust-text">Two popular categories, one platform.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-text">© 2026 KarigarOnline.com. All rights reserved.</p>
+    </div>
+  </footer>
+{% endblock %}
+
+
