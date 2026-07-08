@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <main class="hero">
+    <div class="container hero-inner">
+      <section class="hero-card" aria-label="Customer Dashboard">
+        <div class="hero-badge">Dashboard</div>
+        <h1 class="hero-title" style="font-size:clamp(1.4rem,2.7vw,2rem);">Find & Hire Professionals</h1>
+        <p class="hero-subtitle" style="margin-bottom:14px">
+          Welcome, <strong>{{ current_user.name }}</strong>
+        </p>
+
+        {% if professionals %}
+          <div style="display:grid; gap:14px; margin-top:18px;">
+            {% for p in professionals %}
+              {% if p.user and p.user.role == 'professional' %}
+                <div style="padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.03)">
+                  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap">
+                    <div>
+                      <div style="font-weight:900; font-size:1.05rem; display:flex; align-items:center; gap:10px; flex-wrap:wrap">
+                        <span>{{ p.user.name }}</span>
+                        <span style="color:rgba(234,240,255,.85); font-weight:800; white-space:nowrap; font-size:.95rem">
+                          {% set rating = (p.average_rating if p.average_rating is not none else 0) %}
+                          {% set rating_rounded = (rating|float) %}
+                          {% set full = (rating_rounded|round(0, 'floor'))|int %}
+                          {% set empty = 5 - full %}
+                          <span aria-label="Average rating">
+                            {% for i in range(full) %}★{% endfor %}{% for i in range(empty) %}☆{% endfor %}
+                          </span>
+                          <span style="opacity:.9">({{ '%.1f'|format(rating_rounded) }})</span>
+                        </span>
+                      </div>
+
+                      <div style="color:rgba(234,240,255,.72); font-weight:700; margin-top:6px">
+                        {% if p.plumber and p.electrician %}Plumber &amp; Electrician{% elif p.plumber %}Plumber{% elif p.electrician %}Electrician{% else %}No services{% endif %}
+                      </div>
+                      <div style="color:rgba(234,240,255,.72); font-weight:700; margin-top:6px">
+                        Phone: <strong>{{ p.user.phone }}</strong>
+                      </div>
+                    </div>
+
+                    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
+                      <a class="btn btn-secondary" href="tel:{{ p.user.phone|e }}" style="min-width:140px">Call</a>
+                      <a class="btn btn-primary" href="{{ url_for('chat_with_professional', professional_id=p.user_id) }}" style="min-width:140px">Chat</a>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% else %}
+          <p style="margin-top:18px; color:rgba(234,240,255,.72); font-weight:700">No professionals found.</p>
+        {% endif %}
+
+        <div class="cta-row" style="margin-top:22px">
+          <a class="btn btn-secondary" href="{{ url_for('logout') }}" style="min-width:260px">Logout</a>
+        </div>
+      </section>
+    </div>
+  </main>
+{% endblock %}
+
